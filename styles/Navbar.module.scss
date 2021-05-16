@@ -1,0 +1,65 @@
+@import "./config";
+
+// =============== Navbar ===============
+.navContainer {
+	background-color: #f4f4f4;
+
+	.navInnerContainer {
+		width: 90%;
+		display: flex;
+		margin: 0 auto;
+		padding: 1rem 0;
+	}
+
+	// Title
+	.navTitle {
+		font-size: $h2-size;
+		font-weight: $font-lite;
+		color: $dark-col;
+	}
+
+	// Search
+	.navSearchWrap {
+		display: flex;
+		align-items: center;
+		margin: 0 auto;
+		transform: translateX(-50%);
+
+		.navSearchInput {
+			padding: 0.5rem 0 0.5rem 0.5rem;
+			font-size: $link-size;
+			border: 1px solid #ccc;
+			outline: none;
+		}
+	}
+}
+
+// =============== Media Queries ===============
+@media screen and (max-width: $media-break-lg) {
+	.navContainer .navInnerContainer {
+		width: 95%;
+		justify-content: space-between;
+	}
+
+	.navContainer .navSearchWrap {
+		margin: 0;
+		transform: none;
+	}
+}
+
+@media screen and (max-width: $media-break-md) {
+	.navContainer .navTitle {
+		font-size: $h2-size - 0.5rem;
+	}
+}
+
+@media screen and (max-width: $media-break-sm) {
+	.navContainer .navInnerContainer {
+		flex-direction: column;
+		align-items: center;
+	}
+
+	.navContainer .navTitleWrap {
+		margin-bottom: 1rem;
+	}
+}

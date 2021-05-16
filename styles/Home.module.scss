@@ -1,0 +1,162 @@
+@import "./config";
+
+// =============== Home Page ===============
+.trackerDisplaySection {
+	margin: 4rem auto;
+	display: flex;
+
+	// ---------- Filter Section ----------
+	.filterSection {
+		flex: 1;
+		padding: 1rem;
+
+		// Title
+		.filterTitleWrap {
+			margin-bottom: 2rem;
+
+			.filterTitle {
+				font-size: $h2-size;
+				font-weight: $font-lite;
+				color: $dark-col;
+			}
+		}
+
+		// Items
+		.filterItem {
+			margin-bottom: 2rem;
+
+			&:last-child {
+				margin-bottom: 0;
+			}
+
+			.filterItemTitle {
+				margin-bottom: 0.5rem;
+				font-size: $h3-size;
+				font-weight: $font-lite;
+				color: $dark-col;
+			}
+
+			.filterItemInputWrap {
+				display: flex;
+				align-items: center;
+				margin-bottom: 0.5rem;
+
+				&:last-child {
+					margin-bottom: 0;
+				}
+			}
+
+			.filterItemInput {
+				height: 20px;
+				width: 20px;
+				margin-right: 2rem;
+			}
+
+			.filterItemDesc {
+				font-size: $p-size;
+			}
+
+			// Price
+			.filterItemPriceInputWrap {
+				flex-direction: column;
+			}
+
+			.filterItemPriceInput {
+				width: 200px;
+			}
+
+			.filterItemPriceDesc {
+				font-size: $p-size;
+			}
+		}
+	}
+
+	// ---------- Showcase Section ----------
+	.showcaseSection {
+		flex: 3;
+		border: 1px solid #ccc;
+
+		// Headers
+		.showcaseHeadersContainer {
+			display: flex;
+			justify-content: space-between;
+			padding: 1rem 0;
+			text-align: center;
+			border-bottom: 1px solid #ccc;
+			background-color: #f4f4f4;
+
+			.showcaseHeaderTitle {
+				flex: 1;
+				font-size: $h3-size - 0.5rem;
+				font-weight: $font-lite;
+				color: $dark-col;
+			}
+
+			.showcaseHeaderTitleName {
+				flex: 2;
+			}
+		}
+
+		// Items
+		.showcaseItem {
+			display: flex;
+			justify-content: space-between;
+			padding: 0.5rem 1rem;
+			border-bottom: 1px solid #ccc;
+		}
+
+		.showcaseItemInnerContainer {
+			flex: 1;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			text-align: center;
+
+			.showcaseItemImg {
+				width: 75px;
+			}
+
+			.showcaseItemDesc {
+				font-size: $p-size;
+			}
+		}
+
+		.showcaseItemNameContainer {
+			flex: 2;
+		}
+	}
+}
+
+@media screen and (max-width: $media-break-lg) {
+	.trackerDisplaySection .showcaseSection .showcaseItemImgContainer {
+		display: none;
+	}
+
+	.showcaseHeaderTitleGPU {
+		display: none;
+	}
+}
+
+@media screen and (max-width: $media-break-md) {
+	.trackerDisplaySection {
+		flex-direction: column;
+	}
+
+	.trackerDisplaySection .filterSection {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.trackerDisplaySection .filterContainer {
+		margin-bottom: 2rem;
+	}
+
+	.trackerDisplaySection
+		.showcaseSection
+		.showcaseHeadersContainer
+		.showcaseHeaderTitle {
+		font-size: $h3-size - 1rem;
+	}
+}

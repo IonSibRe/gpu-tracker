@@ -1,7 +1,12 @@
-import '../styles/globals.css'
+import "../styles/globals.scss";
+import { TrackerProvider } from "../context/TrackerContext";
 
 function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
+	return (
+		<TrackerProvider>
+			<Component {...pageProps} />
+		</TrackerProvider>
+	);
 }
 
-export default MyApp
+export default MyApp;
