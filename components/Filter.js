@@ -1,6 +1,29 @@
+import { useState, useEffect, useContext } from "react";
+import { v4 as uuidv4 } from "uuid";
+import { TrackerContext } from "../context/TrackerContext";
 import styles from "../styles/Home.module.scss";
 
 const Filter = () => {
+	const {
+		allCards,
+		currentMinPrice,
+		currentMaxPrice,
+		manufacturersChecked,
+		storesChecked,
+		sortPrice,
+	} = useContext(TrackerContext);
+
+	const stores = [...new Set(allCards.map((item) => item.store))];
+	const manufacturers = [
+		...new Set(allCards.map((item) => item.manufacturer)),
+	];
+
+	const [currentMaxPriceUI, setCurrentMaxPriceUI] = useState(currentMaxPrice);
+
+	useEffect(() => {
+		setCurrentMaxPriceUI(currentMaxPrice);
+	}, [currentMaxPrice]);
+
 	return (
 		<section className={styles.filterSection}>
 			<div className={styles.filterContainer}>
@@ -16,31 +39,42 @@ const Filter = () => {
 							type="checkbox"
 							className={styles.filterItemInput}
 						/>
-						<span className={styles.filterItemDesc}>Alza</span>
+						<span className={styles.filterItemDesc}>All</span>
 					</div>
-					<div className={styles.filterItemInputWrap}>
-						<input
-							type="checkbox"
-							className={styles.filterItemInput}
-						/>
-						<span className={styles.filterItemDesc}>CZC</span>
-					</div>
-					<div className={styles.filterItemInputWrap}>
-						<input
-							type="checkbox"
-							className={styles.filterItemInput}
-						/>
-						<span className={styles.filterItemDesc}>TSBohemia</span>
-					</div>
+					{stores.map((store) => {
+						return (
+							<div
+								className={styles.filterItemInputWrap}
+								key={uuidv4()}
+							>
+								<input
+									type="checkbox"
+									className={styles.filterItemInput}
+								/>
+								<span className={styles.filterItemDesc}>
+									{store}
+								</span>
+							</div>
+						);
+					})}
 				</div>
 
 				{/* Price */}
 				<div className={styles.filterItem}>
 					<h3 className={styles.filterItemTitle}>Price</h3>
 					<div className={`${styles.filterItemPriceInputWrap}`}>
-						<p className={styles.filterItemPriceDesc}>$0 - $100</p>
+						<p className={styles.filterItemPriceDesc}>
+							${currentMinPrice} - ${currentMaxPriceUI}
+						</p>
 						<input
 							type="range"
+							min={currentMinPrice}
+							max={currentMaxPrice}
+							defaultValue={currentMaxPrice}
+							onChange={(e) => {
+								sortPrice(e.target.value);
+								setCurrentMaxPriceUI(e.target.value);
+							}}
 							className={styles.filterItemPriceInput}
 						/>
 					</div>
@@ -48,32 +82,30 @@ const Filter = () => {
 
 				{/* Name */}
 				<div className={styles.filterItem}>
-					<h3 className={styles.filterItemTitle}>Name</h3>
+					<h3 className={styles.filterItemTitle}>Manufacturer</h3>
 					<div className={styles.filterItemInputWrap}>
 						<input
 							type="checkbox"
 							className={styles.filterItemInput}
 						/>
-						<span className={styles.filterItemDesc}>
-							GTX 1660Ti
-						</span>
+						<span className={styles.filterItemDesc}>ALL</span>
 					</div>
-					<div className={styles.filterItemInputWrap}>
-						<input
-							type="checkbox"
-							className={styles.filterItemInput}
-						/>
-						<span className={styles.filterItemDesc}>
-							RTX 2080Ti
-						</span>
-					</div>
-					<div className={styles.filterItemInputWrap}>
-						<input
-							type="checkbox"
-							className={styles.filterItemInput}
-						/>
-						<span className={styles.filterItemDesc}>GT 710</span>
-					</div>
+					{manufacturers.map((card) => {
+						return (
+							<div
+								className={styles.filterItemInputWrap}
+								key={uuidv4()}
+							>
+								<input
+									type="checkbox"
+									className={styles.filterItemInput}
+								/>
+								<span className={styles.filterItemDesc}>
+									{card}
+								</span>
+							</div>
+						);
+					})}
 				</div>
 			</div>
 		</section>

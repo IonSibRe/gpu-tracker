@@ -1,7 +1,19 @@
+import { useContext } from "react";
+import { TrackerContext } from "../context/TrackerContext";
 import styles from "../styles/Home.module.scss";
 import ShowcaseItem from "./ShowcaseItem";
 
-const Showcase = ({ data }) => {
+const Showcase = () => {
+	const { currentCards } = useContext(TrackerContext);
+
+	if (!currentCards) {
+		return (
+			<div>
+				<h1>Loading</h1>
+			</div>
+		);
+	}
+
 	return (
 		<section className={styles.showcaseSection}>
 			<div className={styles.showcaseInnerSection}>
@@ -21,8 +33,8 @@ const Showcase = ({ data }) => {
 					<h3 className={styles.showcaseHeaderTitle}>In Stock</h3>
 				</div>
 				<div className={styles.showcaseItemsContainer}>
-					{Object.entries(data).map((item) => {
-						return <ShowcaseItem item={item} key={item[1].id} />;
+					{currentCards.map((item) => {
+						return <ShowcaseItem item={item} key={item.id} />;
 					})}
 				</div>
 			</div>

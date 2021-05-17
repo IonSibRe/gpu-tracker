@@ -1,9 +1,7 @@
 import styles from "../styles/Home.module.scss";
 
 const ShowcaseItem = ({ item }) => {
-	const name = item[0];
-	const stores = item[1].stores[0];
-	const { store, price, inStock } = stores;
+	const { name, store, price, inStock } = item;
 
 	return (
 		<div className={styles.showcaseItem}>
