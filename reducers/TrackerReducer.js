@@ -23,10 +23,43 @@ const TrackerReducer = (state, action) => {
 				currentMaxPrice: maxPrice,
 			};
 
+		case "SORT_SEARCH":
+			console.log(action.payload);
+
+			let filteredCards = [...state.allCards];
+
+			filteredCards = filteredCards.filter((card) => {
+				if (!card.name.includes(action.payload)) {
+					return;
+				}
+
+				if (
+					state.manufacturersChecked.includes(card.manufacturer) ||
+					state.manufacturersChecked.includes("all")
+				) {
+					if (
+						state.storesChecked.includes(card.store) ||
+						state.storesChecked.includes("all")
+					) {
+						return card;
+					}
+				}
+			});
+
+			return {
+				...state,
+				currentCards: filteredCards,
+				currentSearch: action.payload,
+			};
+
 		case "SORT_PRICE":
 			let newCards = [...state.allCards];
 
 			newCards = newCards.filter((card) => {
+				if (!card.name.includes(state.currentSearch)) {
+					return;
+				}
+
 				if (
 					state.manufacturersChecked.includes(card.manufacturer) ||
 					state.manufacturersChecked.includes("all")
@@ -64,6 +97,10 @@ const TrackerReducer = (state, action) => {
 					: newChecked.splice(currentIndex, 1);
 
 				state.allCards.forEach((card) => {
+					if (!card.name.includes(state.currentSearch)) {
+						return;
+					}
+
 					if (
 						newChecked.includes(card.store) ||
 						newChecked.includes("all")
@@ -98,6 +135,10 @@ const TrackerReducer = (state, action) => {
 					: newChecked.splice(currentIndex, 1);
 
 				state.allCards.forEach((card) => {
+					if (!card.name.includes(state.currentSearch)) {
+						return;
+					}
+
 					if (
 						newChecked.includes(card.manufacturer) ||
 						newChecked.includes("all")

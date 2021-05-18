@@ -26,11 +26,11 @@ const Showcase = () => {
 					<h3
 						className={`${styles.showcaseHeaderTitle} ${styles.showcaseHeaderTitleName}`}
 					>
-						Name
+						Název
 					</h3>
-					<h3 className={styles.showcaseHeaderTitle}>Store</h3>
-					<h3 className={styles.showcaseHeaderTitle}>Price</h3>
-					<h3 className={styles.showcaseHeaderTitle}>In Stock</h3>
+					<h3 className={styles.showcaseHeaderTitle}>Obchod</h3>
+					<h3 className={styles.showcaseHeaderTitle}>Cena</h3>
+					<h3 className={styles.showcaseHeaderTitle}>Na Skladě</h3>
 				</div>
 				<div className={styles.showcaseItemsContainer}>
 					{currentCards.map((item) => {

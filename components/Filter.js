@@ -31,12 +31,12 @@ const Filter = () => {
 		<section className={styles.filterSection}>
 			<div className={styles.filterContainer}>
 				<div className={styles.filterTitleWrap}>
-					<h2 className={styles.filterTitle}>Filter By</h2>
+					<h2 className={styles.filterTitle}>Třídit podle</h2>
 				</div>
 
 				{/* Store */}
 				<div className={styles.filterItem}>
-					<h3 className={styles.filterItemTitle}>Store</h3>
+					<h3 className={styles.filterItemTitle}>Obchodu</h3>
 					{stores.map((store) => {
 						return (
 							<div
@@ -50,7 +50,7 @@ const Filter = () => {
 									onChange={() => sortStore(store)}
 								/>
 								<span className={styles.filterItemDesc}>
-									{store}
+									{store === "all" ? "vše" : store}
 								</span>
 							</div>
 						);
@@ -59,7 +59,7 @@ const Filter = () => {
 
 				{/* Price */}
 				<div className={styles.filterItem}>
-					<h3 className={styles.filterItemTitle}>Price</h3>
+					<h3 className={styles.filterItemTitle}>Ceny</h3>
 					<div className={`${styles.filterItemPriceInputWrap}`}>
 						<p className={styles.filterItemPriceDesc}>
 							{formatter.format(currentMinPrice)} -{" "}
@@ -81,7 +81,7 @@ const Filter = () => {
 
 				{/* Name */}
 				<div className={styles.filterItem}>
-					<h3 className={styles.filterItemTitle}>Manufacturer</h3>
+					<h3 className={styles.filterItemTitle}>Výrobce</h3>
 					{manufacturers.map((manufacturer) => {
 						return (
 							<div
@@ -99,7 +99,9 @@ const Filter = () => {
 									}
 								/>
 								<span className={styles.filterItemDesc}>
-									{manufacturer}
+									{manufacturer === "all"
+										? "vše"
+										: manufacturer}
 								</span>
 							</div>
 						);

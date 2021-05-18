@@ -6,6 +6,7 @@ const TrackerContext = React.createContext();
 const initialState = {
 	allCards: [],
 	currentCards: [],
+	currentSearch: "",
 	isLoading: false,
 	currentMinPrice: 0,
 	currentMaxPrice: 0,
@@ -23,6 +24,11 @@ const TrackerProvider = ({ children }) => {
 
 	const setAllCards = (data) => {
 		dispatch({ type: "SET_ALL_CARDS", payload: data });
+	};
+
+	// Sort Search
+	const sortSearch = (search) => {
+		dispatch({ type: "SORT_SEARCH", payload: search });
 	};
 
 	// Sort Price
@@ -53,6 +59,7 @@ const TrackerProvider = ({ children }) => {
 				...state,
 				formatter,
 				setAllCards,
+				sortSearch,
 				sortPrice,
 				sortStore,
 				sortManufacturer,
