@@ -6,18 +6,21 @@ import styles from "../styles/Home.module.scss";
 const Filter = () => {
 	const {
 		allCards,
+		formatter,
 		currentMinPrice,
 		currentMaxPrice,
 		manufacturersChecked,
 		storesChecked,
 		sortPrice,
+		sortStore,
+		sortManufacturer,
 	} = useContext(TrackerContext);
 
-	const stores = [...new Set(allCards.map((item) => item.store))];
+	const stores = ["all", ...new Set(allCards.map((item) => item.store))];
 	const manufacturers = [
+		"all",
 		...new Set(allCards.map((item) => item.manufacturer)),
 	];
-
 	const [currentMaxPriceUI, setCurrentMaxPriceUI] = useState(currentMaxPrice);
 
 	useEffect(() => {
@@ -34,13 +37,6 @@ const Filter = () => {
 				{/* Store */}
 				<div className={styles.filterItem}>
 					<h3 className={styles.filterItemTitle}>Store</h3>
-					<div className={styles.filterItemInputWrap}>
-						<input
-							type="checkbox"
-							className={styles.filterItemInput}
-						/>
-						<span className={styles.filterItemDesc}>All</span>
-					</div>
 					{stores.map((store) => {
 						return (
 							<div
@@ -50,6 +46,8 @@ const Filter = () => {
 								<input
 									type="checkbox"
 									className={styles.filterItemInput}
+									checked={storesChecked.includes(store)}
+									onChange={() => sortStore(store)}
 								/>
 								<span className={styles.filterItemDesc}>
 									{store}
@@ -64,7 +62,8 @@ const Filter = () => {
 					<h3 className={styles.filterItemTitle}>Price</h3>
 					<div className={`${styles.filterItemPriceInputWrap}`}>
 						<p className={styles.filterItemPriceDesc}>
-							${currentMinPrice} - ${currentMaxPriceUI}
+							{formatter.format(currentMinPrice)} -{" "}
+							{formatter.format(currentMaxPriceUI)}
 						</p>
 						<input
 							type="range"
@@ -83,14 +82,7 @@ const Filter = () => {
 				{/* Name */}
 				<div className={styles.filterItem}>
 					<h3 className={styles.filterItemTitle}>Manufacturer</h3>
-					<div className={styles.filterItemInputWrap}>
-						<input
-							type="checkbox"
-							className={styles.filterItemInput}
-						/>
-						<span className={styles.filterItemDesc}>ALL</span>
-					</div>
-					{manufacturers.map((card) => {
+					{manufacturers.map((manufacturer) => {
 						return (
 							<div
 								className={styles.filterItemInputWrap}
@@ -99,9 +91,15 @@ const Filter = () => {
 								<input
 									type="checkbox"
 									className={styles.filterItemInput}
+									checked={manufacturersChecked.includes(
+										manufacturer
+									)}
+									onChange={() =>
+										sortManufacturer(manufacturer)
+									}
 								/>
 								<span className={styles.filterItemDesc}>
-									{card}
+									{manufacturer}
 								</span>
 							</div>
 						);
