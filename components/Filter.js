@@ -16,16 +16,19 @@ const Filter = () => {
 		sortManufacturer,
 	} = useContext(TrackerContext);
 
+	const [currentMaxPriceUI, setCurrentMaxPriceUI] = useState(currentMaxPrice);
+	const [currentMinPriceUI, setCurrentMinPriceUI] = useState(currentMinPrice);
+
 	const stores = ["all", ...new Set(allCards.map((item) => item.store))];
 	const manufacturers = [
 		"all",
 		...new Set(allCards.map((item) => item.manufacturer)),
 	];
-	const [currentMaxPriceUI, setCurrentMaxPriceUI] = useState(currentMaxPrice);
 
 	useEffect(() => {
 		setCurrentMaxPriceUI(currentMaxPrice);
-	}, [currentMaxPrice]);
+		setCurrentMinPriceUI(currentMinPrice);
+	}, [currentMaxPrice, currentMinPrice]);
 
 	return (
 		<section className={styles.filterSection}>
@@ -62,7 +65,7 @@ const Filter = () => {
 					<h3 className={styles.filterItemTitle}>Ceny</h3>
 					<div className={`${styles.filterItemPriceInputWrap}`}>
 						<p className={styles.filterItemPriceDesc}>
-							{formatter.format(currentMinPrice)} -{" "}
+							{formatter.format(currentMinPriceUI)} -{" "}
 							{formatter.format(currentMaxPriceUI)}
 						</p>
 						<input

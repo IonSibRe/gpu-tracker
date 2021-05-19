@@ -85,6 +85,19 @@ const TrackerReducer = (state, action) => {
 			let newChecked;
 			let updatedCards = [];
 
+			// If all is checked set only all
+			// If anything else gets checked remove all
+			const checkSetAll = (newChecked) => {
+				if (action.payload.value === "all") {
+					newChecked = ["all"];
+				} else {
+					const allIndex = newChecked.indexOf("all");
+					if (allIndex !== -1) newChecked.splice(allIndex, 1);
+				}
+
+				return newChecked;
+			};
+
 			// Sort Store
 			if (action.payload.type === "sortStore") {
 				currentIndex = state.storesChecked.indexOf(
@@ -92,9 +105,14 @@ const TrackerReducer = (state, action) => {
 				);
 				newChecked = [...state.storesChecked];
 
-				currentIndex === -1
-					? newChecked.push(action.payload.value)
-					: newChecked.splice(currentIndex, 1);
+				if (currentIndex === -1) {
+					newChecked.push(action.payload.value);
+				} else {
+					newChecked.splice(currentIndex, 1);
+				}
+
+				// Check for All Option
+				newChecked = checkSetAll(newChecked);
 
 				state.allCards.forEach((card) => {
 					if (!card.name.includes(state.currentSearch)) {
@@ -133,6 +151,9 @@ const TrackerReducer = (state, action) => {
 				currentIndex === -1
 					? newChecked.push(action.payload.value)
 					: newChecked.splice(currentIndex, 1);
+
+				// Check for All Option
+				newChecked = checkSetAll(newChecked);
 
 				state.allCards.forEach((card) => {
 					if (!card.name.includes(state.currentSearch)) {
