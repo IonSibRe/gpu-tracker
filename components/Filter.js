@@ -1,6 +1,8 @@
 import { useState, useEffect, useContext } from "react";
 import { v4 as uuidv4 } from "uuid";
+import { Range } from "rc-slider";
 import { TrackerContext } from "../context/TrackerContext";
+import "rc-slider/assets/index.css";
 import styles from "../styles/Home.module.scss";
 
 const Filter = () => {
@@ -28,7 +30,15 @@ const Filter = () => {
 	useEffect(() => {
 		setCurrentMaxPriceUI(currentMaxPrice);
 		setCurrentMinPriceUI(currentMinPrice);
-	}, [currentMaxPrice, currentMinPrice]);
+	}, [currentMinPrice, currentMaxPrice]);
+
+	if (allCards.length === 0) {
+		return (
+			<div>
+				<h1>Loading</h1>
+			</div>
+		);
+	}
 
 	return (
 		<section className={styles.filterSection}>
@@ -68,16 +78,19 @@ const Filter = () => {
 							{formatter.format(currentMinPriceUI)} -{" "}
 							{formatter.format(currentMaxPriceUI)}
 						</p>
-						<input
-							type="range"
+						<Range
 							min={currentMinPrice}
 							max={currentMaxPrice}
-							defaultValue={currentMaxPrice}
+							defaultValue={[currentMinPrice, currentMaxPrice]}
 							onChange={(e) => {
-								sortPrice(e.target.value);
-								setCurrentMaxPriceUI(e.target.value);
+								sortPrice(e);
+								setCurrentMinPriceUI(e[0]);
+								setCurrentMaxPriceUI(e[1]);
 							}}
 							className={styles.filterItemPriceInput}
+							trackStyle={[
+								{ backgroundColor: "rgb(10, 120, 245)" },
+							]}
 						/>
 					</div>
 				</div>

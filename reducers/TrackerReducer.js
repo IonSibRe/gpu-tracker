@@ -54,6 +54,7 @@ const TrackerReducer = (state, action) => {
 
 		case "SORT_PRICE":
 			let newCards = [...state.allCards];
+			const [sortMinPrice, sortMaxPrice] = action.payload;
 
 			newCards = newCards.filter((card) => {
 				if (!card.name.includes(state.currentSearch)) {
@@ -76,7 +77,8 @@ const TrackerReducer = (state, action) => {
 			return {
 				...state,
 				currentCards: newCards.filter(
-					(card) => card.price <= parseInt(action.payload)
+					(card) =>
+						card.price >= sortMinPrice && card.price <= sortMaxPrice
 				),
 			};
 

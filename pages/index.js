@@ -28,9 +28,9 @@ export default function Home({ data }) {
 }
 
 export async function getServerSideProps() {
-	const url = "http://localhost:8080/api/v1";
+	const url = "https://zahrajto.wtf:8443/api/v1";
 
-	const res = await fetch(`${url}/allGraphicsCards`);
+	const res = await fetch(`${url}/gpu/all`);
 	const data = await res.json();
 
 	return {
