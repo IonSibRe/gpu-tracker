@@ -1,0 +1,96 @@
+@import "./config";
+
+// =============== Footer ===============
+.footer {
+	background-color: #333;
+}
+
+.innerFooterWrap {
+	width: $section-width;
+	margin: 0 auto;
+
+	.footerContentWrap {
+		display: flex;
+		justify-content: space-between;
+		padding: 2rem 0;
+	}
+
+	// Contact
+	.footerContactTitle {
+		margin-bottom: 1rem;
+		font-size: $h3-size;
+		font-weight: $font-lite;
+		color: #fff;
+	}
+
+	.footerContactItem {
+		font-size: $p-size;
+		color: #fff;
+	}
+
+	// Donate
+	.footerDonateTitle {
+		margin-bottom: 1rem;
+		font-size: $h3-size;
+		font-weight: $font-lite;
+		color: #fff;
+	}
+
+	.footerDonateItem {
+		margin-bottom: 0.75rem;
+	}
+
+	.footerDonateCoinTitle {
+		font-size: $h4-size - 0.5rem;
+		font-weight: $font-lite;
+		color: #fff;
+	}
+
+	.footerDonateText {
+		font-size: $p-size;
+		color: #fff;
+	}
+}
+
+// =============== Footer Final ===============
+.footerFinal {
+	background-color: #222;
+
+	.footerFinalWrap {
+		padding: 1rem 0;
+		text-align: center;
+	}
+
+	.footerFinalText {
+		margin-bottom: 0.5rem;
+		font-size: $p-size - 0.25rem;
+		color: #fff;
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+}
+
+@media screen and (max-width: $media-break-lg) {
+	.innerFooterWrap {
+		width: 95%;
+		margin: 0 auto;
+	}
+}
+
+@media screen and (max-width: $media-break-md) {
+	.innerFooterWrap .footerContentWrap {
+		flex-direction: column;
+		align-items: center;
+	}
+
+	.innerFooterWrap .footerContactWrap {
+		margin-bottom: 2rem;
+		text-align: center;
+	}
+
+	.innerFooterWrap .footerDonateWrap {
+		text-align: center;
+	}
+}
