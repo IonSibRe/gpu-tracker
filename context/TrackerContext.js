@@ -1,4 +1,4 @@
-import React, { useReducer } from "react";
+import React, { useEffect, useReducer } from "react";
 import TrackerReducer from "../reducers/TrackerReducer";
 
 const TrackerContext = React.createContext();
@@ -10,6 +10,7 @@ const initialState = {
 	isLoading: false,
 	currentMinPrice: 0,
 	currentMaxPrice: 0,
+	currentlySortedBy: "new",
 	storesChecked: ["all"],
 	manufacturersChecked: ["all"],
 };
@@ -24,6 +25,11 @@ const TrackerProvider = ({ children }) => {
 
 	const setAllCards = (data) => {
 		dispatch({ type: "SET_ALL_CARDS", payload: data });
+	};
+
+	// Sort Default
+	const sortDefault = (value) => {
+		dispatch({ type: "SORT_DEFAULT", payload: value });
 	};
 
 	// Sort Search
@@ -53,12 +59,18 @@ const TrackerProvider = ({ children }) => {
 		dispatch({ type: "CALCULATE_NEW_PRICES" });
 	};
 
+	// Sort when products change
+	useEffect(() => {
+		dispatch({ type: "SORT_DEFAULT", payload: state.currentlySortedBy });
+	}, [state.currentCards, state.currentlySortedBy]);
+
 	return (
 		<TrackerContext.Provider
 			value={{
 				...state,
 				formatter,
 				setAllCards,
+				sortDefault,
 				sortSearch,
 				sortPrice,
 				sortStore,

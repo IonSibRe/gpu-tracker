@@ -23,13 +23,43 @@ const TrackerReducer = (state, action) => {
 				currentMaxPrice: maxPrice,
 			};
 
-		case "SORT_SEARCH":
-			console.log(action.payload);
+		case "SORT_DEFAULT":
+			if (action.payload === "new") {
+				return {
+					...state,
+					currentlySortedBy: action.payload,
+				};
+			}
 
+			if (action.payload === "price-low") {
+				return {
+					...state,
+					currentCards: state.currentCards.sort(
+						(a, b) => a.price - b.price
+					),
+					currentlySortedBy: action.payload,
+				};
+			}
+
+			if (action.payload === "price-high") {
+				return {
+					...state,
+					currentCards: state.currentCards.sort(
+						(a, b) => b.price - a.price
+					),
+					currentlySortedBy: action.payload,
+				};
+			}
+
+		case "SORT_SEARCH":
 			let filteredCards = [...state.allCards];
 
 			filteredCards = filteredCards.filter((card) => {
-				if (!card.name.includes(action.payload)) {
+				if (
+					!card.name
+						.toLowerCase()
+						.includes(action.payload.toLowerCase())
+				) {
 					return;
 				}
 

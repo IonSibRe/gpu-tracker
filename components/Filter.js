@@ -13,6 +13,7 @@ const Filter = () => {
 		currentMaxPrice,
 		manufacturersChecked,
 		storesChecked,
+		sortDefault,
 		sortPrice,
 		sortStore,
 		sortManufacturer,
@@ -20,17 +21,27 @@ const Filter = () => {
 
 	const [currentMaxPriceUI, setCurrentMaxPriceUI] = useState(currentMaxPrice);
 	const [currentMinPriceUI, setCurrentMinPriceUI] = useState(currentMinPrice);
-
-	const stores = ["all", ...new Set(allCards.map((item) => item.store))];
-	const manufacturers = [
+	const [stores, setStores] = useState([
+		"all",
+		...new Set(allCards.map((item) => item.store)),
+	]);
+	const [manufacturers, setManufacturers] = useState([
 		"all",
 		...new Set(allCards.map((item) => item.manufacturer)),
-	];
+	]);
 
 	useEffect(() => {
 		setCurrentMaxPriceUI(currentMaxPrice);
 		setCurrentMinPriceUI(currentMinPrice);
 	}, [currentMinPrice, currentMaxPrice]);
+
+	useEffect(() => {
+		setStores(["all", ...new Set(allCards.map((item) => item.store))]);
+		setManufacturers([
+			"all",
+			...new Set(allCards.map((item) => item.manufacturer)),
+		]);
+	}, [allCards]);
 
 	if (allCards.length === 0) {
 		return (
@@ -45,6 +56,19 @@ const Filter = () => {
 			<div className={styles.filterContainer}>
 				<div className={styles.filterTitleWrap}>
 					<h2 className={styles.filterTitle}>Třídit podle</h2>
+				</div>
+
+				<div className={styles.filterItem}>
+					<h3 className={styles.filterItemTitle}>Sort</h3>
+					<select
+						name="sort"
+						className={styles.filterSortSelect}
+						onChange={(e) => sortDefault(e.target.value)}
+					>
+						<option value="new">new</option>
+						<option value="price-low">price: low to high</option>
+						<option value="price-high">price: high to low</option>
+					</select>
 				</div>
 
 				{/* Store */}

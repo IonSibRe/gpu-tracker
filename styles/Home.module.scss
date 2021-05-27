@@ -36,6 +36,15 @@
 				color: $dark-col;
 			}
 
+			.filterSortSelect {
+				padding-right: 4rem;
+				font-size: $link-size;
+				text-transform: capitalize;
+				background-color: #f4f4f4;
+				border-radius: 5px;
+				outline: none;
+			}
+
 			.filterItemInputWrap {
 				display: flex;
 				align-items: center;
