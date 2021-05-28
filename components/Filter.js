@@ -59,15 +59,15 @@ const Filter = () => {
 				</div>
 
 				<div className={styles.filterItem}>
-					<h3 className={styles.filterItemTitle}>Sort</h3>
+					<h3 className={styles.filterItemTitle}>Řazení</h3>
 					<select
 						name="sort"
 						className={styles.filterSortSelect}
 						onChange={(e) => sortDefault(e.target.value)}
 					>
-						<option value="new">new</option>
-						<option value="price-low">price: low to high</option>
-						<option value="price-high">price: high to low</option>
+						<option value="new">Nové</option>
+						<option value="price-low">Od Nejlevnější</option>
+						<option value="price-high">Od Nejdražších</option>
 					</select>
 				</div>
 
