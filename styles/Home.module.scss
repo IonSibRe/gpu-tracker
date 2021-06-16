@@ -90,16 +90,17 @@
 		.showcaseHeadersContainer {
 			display: flex;
 			justify-content: space-between;
-			padding: 1rem 0;
 			text-align: center;
 			border-bottom: 1px solid #ccc;
 			background-color: #f4f4f4;
 
 			.showcaseHeaderTitle {
 				flex: 1;
+				padding: 1rem 0;
 				font-size: $h3-size - 0.5rem;
 				font-weight: $font-lite;
 				color: $dark-col;
+				cursor: pointer;
 			}
 
 			.showcaseHeaderTitleName {
@@ -128,6 +129,7 @@
 
 			.showcaseItemDesc {
 				font-size: $p-size;
+				color: $dark-col;
 			}
 		}
 

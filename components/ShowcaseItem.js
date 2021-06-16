@@ -1,10 +1,11 @@
 import { useContext } from "react";
+import Link from "next/link";
 import { TrackerContext } from "../context/TrackerContext";
 import styles from "../styles/Home.module.scss";
 
 const ShowcaseItem = ({ item }) => {
 	const { formatter } = useContext(TrackerContext);
-	const { name, store, price, inStock } = item;
+	const { name, store, price, link, inStock } = item;
 
 	return (
 		<div className={styles.showcaseItem}>
@@ -20,7 +21,11 @@ const ShowcaseItem = ({ item }) => {
 			<div
 				className={`${styles.showcaseItemInnerContainer} ${styles.showcaseItemNameContainer}`}
 			>
-				<p className={styles.showcaseItemDesc}>{name}</p>
+				<Link href={link}>
+					<a className={styles.showcaseItemDesc} target="_blank">
+						{name}
+					</a>
+				</Link>
 			</div>
 			<div className={styles.showcaseItemInnerContainer}>
 				<p className={styles.showcaseItemDesc}>{store}</p>
