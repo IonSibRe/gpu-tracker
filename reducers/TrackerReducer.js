@@ -18,7 +18,8 @@ const TrackerReducer = (state, action) => {
 			return {
 				...state,
 				allCards,
-				currentCards: allCards,
+				sortedCards: allCards,
+				renderCards: allCards,
 				currentMinPrice: minPrice,
 				currentMaxPrice: maxPrice,
 			};
@@ -34,7 +35,7 @@ const TrackerReducer = (state, action) => {
 			if (action.payload === "price-low") {
 				return {
 					...state,
-					currentCards: state.currentCards.sort(
+					renderCards: state.sortedCards.sort(
 						(a, b) => a.price - b.price
 					),
 					currentlySortedBy: action.payload,
@@ -44,7 +45,7 @@ const TrackerReducer = (state, action) => {
 			if (action.payload === "price-high") {
 				return {
 					...state,
-					currentCards: state.currentCards.sort(
+					renderCards: state.sortedCards.sort(
 						(a, b) => b.price - a.price
 					),
 					currentlySortedBy: action.payload,
@@ -78,7 +79,7 @@ const TrackerReducer = (state, action) => {
 
 			return {
 				...state,
-				currentCards: filteredCards,
+				sortedCards: filteredCards,
 				currentSearch: action.payload,
 			};
 
@@ -106,7 +107,7 @@ const TrackerReducer = (state, action) => {
 
 			return {
 				...state,
-				currentCards: newCards.filter(
+				sortedCards: newCards.filter(
 					(card) =>
 						card.price >= sortMinPrice && card.price <= sortMaxPrice
 				),
@@ -169,7 +170,7 @@ const TrackerReducer = (state, action) => {
 				return {
 					...state,
 					storesChecked: newChecked,
-					currentCards: updatedCards,
+					sortedCards: updatedCards,
 				};
 			}
 
@@ -208,7 +209,7 @@ const TrackerReducer = (state, action) => {
 				return {
 					...state,
 					manufacturersChecked: newChecked,
-					currentCards: updatedCards,
+					sortedCards: updatedCards,
 				};
 			}
 
@@ -218,7 +219,7 @@ const TrackerReducer = (state, action) => {
 
 		case "CALCULATE_NEW_PRICES":
 			const newPrices = [
-				...new Set(state.currentCards.map((card) => card.price)),
+				...new Set(state.sortedCards.map((card) => card.price)),
 			];
 
 			// No current products

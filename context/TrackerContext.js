@@ -5,7 +5,8 @@ const TrackerContext = React.createContext();
 
 const initialState = {
 	allCards: [],
-	currentCards: [],
+	sortedCards: [],
+	renderCards: [],
 	currentSearch: "",
 	isLoading: false,
 	currentMinPrice: 0,
@@ -62,7 +63,7 @@ const TrackerProvider = ({ children }) => {
 	// Sort when products change
 	useEffect(() => {
 		dispatch({ type: "SORT_DEFAULT", payload: state.currentlySortedBy });
-	}, [state.currentCards, state.currentlySortedBy]);
+	}, [state.sortedCards, state.currentlySortedBy]);
 
 	return (
 		<TrackerContext.Provider

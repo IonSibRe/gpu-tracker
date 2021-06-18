@@ -1,4 +1,5 @@
 import { useContext, useEffect } from "react";
+import SockJsClient from "react-stomp";
 import { TrackerContext } from "../context/TrackerContext";
 import Layout from "../components/Layout";
 import Navbar from "../components/Navbar";
@@ -18,6 +19,13 @@ export default function Home({ data }) {
 	return (
 		<Layout>
 			<Navbar />
+			<SockJsClient
+				url="https://gpu.zahrajto.wtf/api/ws"
+				topics={["/updates"]}
+				onMessage={(msg) => {
+					console.log(msg);
+				}}
+			/>
 			<section
 				className={`${styles.trackerDisplaySection} ${styles.sectionCenter}`}
 			>

@@ -4,10 +4,10 @@ import styles from "../styles/Home.module.scss";
 import ShowcaseItem from "./ShowcaseItem";
 
 const Showcase = () => {
-	const { currentCards, sortDefault } = useContext(TrackerContext);
+	const { renderCards, sortDefault } = useContext(TrackerContext);
 	const [priceSortStatus, setPriceSortStatus] = useState("");
 
-	if (!currentCards) {
+	if (!renderCards) {
 		return (
 			<div>
 				<h1>Loading</h1>
@@ -57,7 +57,7 @@ const Showcase = () => {
 					<h3 className={styles.showcaseHeaderTitle}>Na Skladě</h3>
 				</div>
 				<div className={styles.showcaseItemsContainer}>
-					{currentCards.map((item) => {
+					{renderCards.map((item) => {
 						return <ShowcaseItem item={item} key={item.id} />;
 					})}
 				</div>
