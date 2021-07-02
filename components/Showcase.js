@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useState, useEffect, useRef, useContext } from "react";
 import { TrackerContext } from "../context/TrackerContext";
 import styles from "../styles/Home.module.scss";
 import ShowcaseItem from "./ShowcaseItem";
@@ -6,11 +6,12 @@ import ShowcaseItem from "./ShowcaseItem";
 const Showcase = () => {
 	const { renderCards, sortDefault } = useContext(TrackerContext);
 	const [priceSortStatus, setPriceSortStatus] = useState("");
+	const arrowIcon = useRef(null);
 
 	if (!renderCards) {
 		return (
-			<div>
-				<h1>Loading</h1>
+			<div className={styles.loaderContainer}>
+				<img src="/assets/img/loader-spinner.gif" alt="#" />
 			</div>
 		);
 	}
@@ -19,16 +20,23 @@ const Showcase = () => {
 		if (priceSortStatus !== "") sortDefault(priceSortStatus);
 	}, [priceSortStatus]);
 
+	useEffect(() => {
+		arrowIcon.current.style.transform = "rotate(90deg)";
+	}, []);
+
 	const sortPriceHeader = () => {
 		switch (priceSortStatus) {
 			case "price-low":
+				arrowIcon.current.style.transform = "rotate(0)";
 				setPriceSortStatus("price-high");
 				break;
 			case "price-high":
 				setPriceSortStatus("price-low");
+				arrowIcon.current.style.transform = "rotate(180deg)";
 				break;
 			default:
 				setPriceSortStatus("price-low");
+				arrowIcon.current.style.transform = "rotate(180deg)";
 				break;
 		}
 	};
@@ -52,7 +60,13 @@ const Showcase = () => {
 						className={`${styles.showcaseHeaderTitle} ${styles.showcaseHeaderTitlePrice}`}
 						onClick={sortPriceHeader}
 					>
-						Cena
+						Cena{" "}
+						<img
+							src="/assets/img/arrow-icon.png"
+							alt="Arrow Icon"
+							ref={arrowIcon}
+							className={styles.arrowIcon}
+						/>
 					</h3>
 					<h3 className={styles.showcaseHeaderTitle}>Na Skladě</h3>
 				</div>

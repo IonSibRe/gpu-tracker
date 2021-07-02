@@ -92,19 +92,35 @@
 			justify-content: space-between;
 			text-align: center;
 			border-bottom: 1px solid #ccc;
-			background-color: #f4f4f4;
 
 			.showcaseHeaderTitle {
 				flex: 1;
+				@include flex-center;
 				padding: 1rem 0;
 				font-size: $h3-size - 0.5rem;
 				font-weight: $font-lite;
+				border-right: 1px solid #ccc;
 				color: $dark-col;
+				background-color: #f4f4f4;
 				cursor: pointer;
+
+				&:last-child {
+					border-right: 0;
+				}
+			}
+
+			.showcaseHeaderTitlePrice:hover {
+				background-color: #e0e0e0;
 			}
 
 			.showcaseHeaderTitleName {
 				flex: 2;
+			}
+
+			.arrowIcon {
+				width: 20px;
+				margin-left: 1rem;
+				transform: rotate(90deg);
 			}
 		}
 
@@ -136,6 +152,12 @@
 		.showcaseItemNameContainer {
 			flex: 2;
 		}
+	}
+
+	// ---------- Loader ----------
+	.loaderContainer {
+		flex: 3;
+		text-align: center;
 	}
 }
 
