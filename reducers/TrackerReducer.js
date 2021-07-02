@@ -80,6 +80,7 @@ const TrackerReducer = (state, action) => {
 			return {
 				...state,
 				sortedCards: filteredCards,
+				renderCards: filteredCards,
 				currentSearch: action.payload,
 			};
 
@@ -108,6 +109,10 @@ const TrackerReducer = (state, action) => {
 			return {
 				...state,
 				sortedCards: newCards.filter(
+					(card) =>
+						card.price >= sortMinPrice && card.price <= sortMaxPrice
+				),
+				renderCards: newCards.filter(
 					(card) =>
 						card.price >= sortMinPrice && card.price <= sortMaxPrice
 				),
@@ -171,6 +176,7 @@ const TrackerReducer = (state, action) => {
 					...state,
 					storesChecked: newChecked,
 					sortedCards: updatedCards,
+					renderCards: updatedCards,
 				};
 			}
 
@@ -210,6 +216,7 @@ const TrackerReducer = (state, action) => {
 					...state,
 					manufacturersChecked: newChecked,
 					sortedCards: updatedCards,
+					renderCards: updatedCards,
 				};
 			}
 
